@@ -1,5 +1,5 @@
 {
-  "name": "gym_vuex",
+  "name": " vuex_new_gym",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -8,14 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "bootstrap": "^5.2.3",
     "vue": "^3.2.45",
-    "vue-router": "^4.1.6",
-    "vuex": "^4.1.0"
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
-    "sass": "^1.57.1",
     "vite": "^4.0.0"
   }
 }
