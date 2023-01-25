@@ -1,11 +1,13 @@
 <template>
-    <h2>Staff</h2>
-  <router-view></router-view>
+   <Master></Master>
 </template>
 
 <script>
+import Master from '../../components/template/staff/Master.vue';
 export default {
-
+components: {
+    Master
+}
 }
 </script>
 
