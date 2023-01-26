@@ -12,11 +12,11 @@
       >
         <img
           class="rounded-circle"
-          src="assets/media/avatars/avatar10.jpg"
+          src="/assets/media/avatars/avatar10.jpg"
           alt="Header Avatar"
           style="width: 21px"
         />
-        <span class="d-none d-sm-inline-block ml-2">Haider</span>
+        <span class="d-none d-sm-inline-block ml-2"></span>
         <i
           class="fa fa-fw fa-angle-down d-none d-sm-inline-block ml-1 mt-1"
         ></i>
@@ -28,7 +28,7 @@
         <div class="p-3 text-center bg-primary-dark rounded-top">
           <img
             class="img-avatar img-avatar48 img-avatar-thumb"
-            src="assets/media/avatars/avatar10.jpg"
+            src="/assets/media/avatars/avatar10.jpg"
             alt=""
           />
           <p class="mt-2 mb-0 text-white font-w500">Haider</p>

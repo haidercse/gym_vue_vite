@@ -280,9 +280,9 @@
 </template>
 
 <script>
-import Footer from "../components/template/Footer.vue";
-import Sidebar from "../components/template/Sidebar.vue";
-import HeaderComp from "../components/template/HeaderComponent.vue";
+import Footer from "../../components/template/Footer.vue";
+import Sidebar from "../../components/template/Sidebar.vue";
+import HeaderComp from "../../components/template/HeaderComponent.vue";
 export default {
   components: { Sidebar, Footer, HeaderComp },
 };
