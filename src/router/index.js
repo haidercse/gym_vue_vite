@@ -28,14 +28,32 @@ const routes = [
         name: 'staff-dashboard',
         component: () => import('../views/staff/Dashboard.vue'),
       },
+      {
+        path: '/staff/members',
+        name: 'member',
+        component: () => import('../views/staff/member/ManageMember.vue'),
+      },
+      {
+        path: '/staff/members/create',
+        name: 'member-create',
+        component: () => import('../views/staff/member/CreateMember.vue'),
+      },
+
 
     ]
+  },
+  //staff-login
+  {
+    path: '/staff/login',
+    name: 'staff-login',
+    component: () => import('../views/staff/LoginStaff.vue')
   }
 
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes,
+  linkActiveClass: "active"
 })
 
 export default router

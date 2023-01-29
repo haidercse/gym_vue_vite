@@ -4,12 +4,43 @@
     <div class="content-side">
       <ul class="nav-main">
         <li class="nav-main-item">
-          <a class="nav-main-link active" href="be_pages_dashboard.html">
+          <router-link class="nav-main-link" :to="{ name: 'staff-dashboard' }">
             <i class="nav-main-link-icon si si-speedometer"></i>
             <span class="nav-main-link-name">Dashboard</span>
-          </a>
+          </router-link>
         </li>
         <li class="nav-main-item">
+          <router-link class="nav-main-link" :to="{ name: 'member'}">
+            <i class="nav-main-link-icon si si-speedometer"></i>
+            <span class="nav-main-link-name">Member</span>
+          </router-link>
+        </li>
+
+        <li class="nav-main-item">
+          <a class="nav-main-link" href="be_pages_dashboard.html">
+            <i class="nav-main-link-icon si si-speedometer"></i>
+            <span class="nav-main-link-name">Logout</span>
+          </a>
+        </li>
+        <!-- <li class="nav-main-item">
+          <div class="dropdown">
+            <a
+              class="nav-main-link dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Dropdown button
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background:#272e38">
+              <a class="dropdown-item " href="#">Another action</a>
+              <a class="dropdown-item " href="#">Something else here</a>
+            </div>
+          </div>
+        </li> -->
+        <!-- <li class="nav-main-item">
           <a
             class="nav-main-link nav-main-link-submenu"
             data-toggle="submenu"
@@ -289,7 +320,7 @@
               </ul>
             </li>
           </ul>
-        </li>
+        </li> -->
       </ul>
     </div>
     <!-- END Side Navigation -->
