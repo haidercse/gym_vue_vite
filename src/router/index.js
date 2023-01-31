@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../stores'
 import HomeView from '../views/website/HomeView.vue'
 
 const routes = [{
@@ -28,18 +29,27 @@ const routes = [{
                 name: 'staff-dashboard',
                 component: () =>
                     import ('../views/staff/Dashboard.vue'),
+                meta: {
+                    requiresAuth: true
+                }
             },
             {
                 path: '/staff/members',
                 name: 'member',
                 component: () =>
                     import ('../views/staff/member/ManageMember.vue'),
+                meta: {
+                    requiresAuth: true
+                }
             },
             {
                 path: '/staff/members/create',
                 name: 'member-create',
                 component: () =>
                     import ('../views/staff/member/CreateMember.vue'),
+                meta: {
+                    requiresAuth: true
+                }
             },
 
 
@@ -50,7 +60,10 @@ const routes = [{
         path: '/staff/login',
         name: 'staff-login',
         component: () =>
-            import ('../views/staff/LoginStaff.vue')
+            import ('../views/staff/LoginStaff.vue'),
+        meta: {
+            visited: true
+        }
     }
 
 ]
@@ -64,13 +77,13 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!store.getters.loggedIn) {
-            next({ name: 'Login' })
+            next({ name: 'staff-login' })
         } else {
             next()
         }
     } else if (to.matched.some(record => record.meta.visited)) {
         if (store.getters.loggedIn) {
-            next({ name: 'Home' })
+            next({ name: 'staff-dashboard' })
 
         } else {
             next()
