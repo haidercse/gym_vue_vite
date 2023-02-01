@@ -40,6 +40,7 @@
                       class="js-validation-signin"
                       action="be_pages_auth_all.html"
                       method="POST"
+                      @submit.prevent="submitUser()"
                     >
                       <div class="py-3">
                         <div class="form-group">
@@ -50,7 +51,8 @@
                             "
                             id="login-username"
                             name="login-username"
-                            placeholder="Username"
+                            v-model="form.email"
+                            placeholder="Name"
                           />
                         </div>
                         <div class="form-group">
@@ -61,6 +63,7 @@
                             "
                             id="login-password"
                             name="login-password"
+                            v-model="form.password"
                             placeholder="Password"
                           />
                         </div>
@@ -107,7 +110,24 @@
 </template>
 
 <script>
-export default {};
+import { mapActions } from "vuex";
+export default {
+  data() {
+    return {
+      form: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    ...mapActions(["loginUser"]),
+    submitUser() {
+      let data = this.form;
+      this.loginUser(data);
+    },
+  },
+};
 </script>
 
 <style>

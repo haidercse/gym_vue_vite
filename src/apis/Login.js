@@ -1,13 +1,12 @@
-// import Api from "./Api";
+import Api from "./Api";
 
 
-// export default {
-//     store(data) {
-//         console.log('data' + data);
-//         return Api.post('/auth/login/', data);
-//     },
+export default {
+    store(data) {
+        return Api.post('/auth/login/', data);
+    },
 
-//     getAuthUser() {
-//         return Api.get('/user/auth');
-//     }
-// }
+    getAuthUser() {
+        return Api.get('/user/auth');
+    }
+}

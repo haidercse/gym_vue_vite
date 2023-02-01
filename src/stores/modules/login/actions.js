@@ -1,5 +1,5 @@
-import login from '../../../apis/Login';
-import router from '../../../routes/index.js';
+import login from '../../../apis/Login.js';
+import router from '../../../router/index';
 
 export const loginUser = ({
     commit
@@ -8,26 +8,27 @@ export const loginUser = ({
         .then(response => {
             if (response.data.status == true) {
                 commit("LOGIN_USER", response.data);
-                commit("SET_SUCCESS", response.data.message);
+                // commit("SET_SUCCESS", response.data.message);
 
-                router.push({ path: '/' });
-                localStorage.setItem("user", JSON.stringify(response.data.token));
+                router.push({ name: 'staff-dashboard' });
+                localStorage.setItem("user", response.data.token);
             }
         }).catch(error => {
-            commit("SET_ERRORS", error.response.data.errors);
+            console.log(error);
         });
 }
 
-export const getAuthUser = ({
-    commit
-}) => {
-    login.getAuthUser()
-        .then((response) => {
-            if (response.data.status == true) {
-                commit('SET_AUTH_USER', response.data.data)
-            }
-        }).catch(error => {
-            commit("SET_ERRORS", error.response.data.errors);
-        });
 
-}
+// export const getAuthUser = ({
+//     commit
+// }) => {
+//     login.getAuthUser()
+//         .then((response) => {
+//             if (response.data.status == true) {
+//                 commit('SET_AUTH_USER', response.data.data)
+//             }
+//         }).catch(error => {
+//             commit("SET_ERRORS", error.response.data.errors);
+//         });
+
+// }
