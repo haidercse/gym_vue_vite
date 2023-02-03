@@ -33,9 +33,7 @@
                     <h1 class="h2 mb-1">OneUI</h1>
                     <p class="text-muted">Welcome, please login.</p>
 
-                    <!-- Sign In Form -->
-                    <!-- jQuery Validation (.js-validation-signin class is initialized in js/pages/op_auth_signin.min.js which was auto compiled from _js/pages/op_auth_signin.js) -->
-                    <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                    <ShowError></ShowError>
                     <form
                       class="js-validation-signin"
                       action="be_pages_auth_all.html"
@@ -110,6 +108,7 @@
 </template>
 
 <script>
+import ShowError from '../../components/utilities/ShowError.vue'
 import { mapActions } from "vuex";
 export default {
   data() {
@@ -120,6 +119,7 @@ export default {
       },
     };
   },
+  components: {ShowError},
   methods: {
     ...mapActions(["loginUser"]),
     submitUser() {

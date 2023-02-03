@@ -3,11 +3,30 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 mt-2" v-if="is_error">
-            <div
+            <div 
               class="alert alert-danger alert-dismissible fade show"
               role="alert"
+              v-if="is_error_message !== null"
             >
               <ul>
+                <li >{{ is_error_message }} </li>
+              </ul>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div 
+              class="alert alert-danger alert-dismissible fade show"
+              role="alert"
+              v-else
+            >
+              <ul>
+                  
                   <li v-for="error,index in errors" :key="index">{{ error[0] }} </li>
               </ul>
               <button
@@ -36,6 +55,7 @@
       ...mapState({
         errors: (state) => state.errors.errors,
         is_error: (state) => state.errors.is_error,
+        is_error_message: (state) => state.errors.error_message,
       }),
     },
   };

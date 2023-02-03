@@ -8,5 +8,9 @@ export default {
 
     getAuthUser() {
         return Api.get('/user/auth');
+    },
+
+    logOut() {
+        return Api.post('/logout');
     }
 }

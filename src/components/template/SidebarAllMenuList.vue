@@ -17,7 +17,7 @@
         </li>
 
         <li class="nav-main-item">
-          <a class="nav-main-link" href="be_pages_dashboard.html">
+          <a   class="nav-main-link" @click="logoutUser" style="cursor: pointer;">
             <i class="nav-main-link-icon si si-speedometer"></i>
             <span class="nav-main-link-name">Logout</span>
           </a>
@@ -329,7 +329,15 @@
 </template>
 
 <script>
-export default {};
+import { mapActions } from 'vuex';
+export default {
+  methods: {
+    ...mapActions(["logout"]),
+    logoutUser(){
+       this.logout();
+    }
+  }
+};
 </script>
 
 <style>

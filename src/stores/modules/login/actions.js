@@ -1,4 +1,5 @@
 import login from '../../../apis/Login.js';
+
 import router from '../../../router/index';
 
 export const loginUser = ({
@@ -8,13 +9,23 @@ export const loginUser = ({
         .then(response => {
             if (response.data.status == true) {
                 commit("LOGIN_USER", response.data);
-                // commit("SET_SUCCESS", response.data.message);
-
-                router.push({ name: 'staff-dashboard' });
+                commit("SET_SUCCESS", response.data.message);
                 localStorage.setItem("user", response.data.token);
+
+                router.push({
+                    name: 'staff-dashboard'
+                });
+                // window.location.reload();
             }
         }).catch(error => {
-            console.log(error.response.data);
+
+            if (error.response.data.status == false) {
+                commit("SET_ERRORS_MESSAGE", error.response.data.message);
+            }
+            if (error.response.data.errors) {
+                commit("SET_ERRORS", error.response.data.errors);
+            }
+
         });
 }
 
@@ -32,3 +43,28 @@ export const loginUser = ({
 //         });
 
 // }
+
+export const logout = ({
+    commit
+}) => {
+    login.logOut()
+        .then(response => {
+            if (response.data.status == true) {
+                commit('LOGOUT', response.data.message)
+                localStorage.removeItem("user");
+                router.push({
+                    name: 'staff-login'
+                });
+                window.location.reload();
+            }
+        }).catch(error => {
+            console.log(error.response.status);
+            if (error.response.status == '401') {
+                localStorage.removeItem("user");
+                router.push({
+                    name: 'staff-login'
+                });
+                window.location.reload();
+            }
+        })
+}

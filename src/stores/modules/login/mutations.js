@@ -7,3 +7,6 @@ export const LOGIN_USER = (state, userData) => {
 export const SET_AUTH_USER = (state, authUserData) => {
     state.authUser = authUserData;
 }
+export const LOGOUT = (state, message) => {
+    state.logout = message;
+}
