@@ -14,7 +14,7 @@ export const loginUser = ({
                 localStorage.setItem("user", response.data.token);
             }
         }).catch(error => {
-            console.log(error);
+            console.log(error.response.data);
         });
 }
 
