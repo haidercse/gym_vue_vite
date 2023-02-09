@@ -16,6 +16,7 @@
             </router-link>
           </div>
         </div>
+       <ShowSuccess></ShowSuccess>
         <div class="block-content">
           <div class="table-responsive">
             <table
@@ -66,6 +67,7 @@
                         data-toggle="tooltip"
                         title=""
                         data-original-title="Delete"
+                        @click="deleteMember(member.id)"
                       >
                         <i class="fa fa-fw fa-times"></i>
                       </button>
@@ -126,16 +128,20 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import ShowSuccess from '../../../components/utilities/ShowSuccess.vue';
 import MainDashboardHeader from "../../../components/template/MainDashboardHeader.vue";
 export default {
   components: {
-    MainDashboardHeader,
+    MainDashboardHeader,ShowSuccess
   },
   mounted() {
     this.getAllMember();
   },
   methods: {
-    ...mapActions(["getAllMember"]),
+    ...mapActions(["getAllMember","memberDelete"]),
+    deleteMember(id){
+       this.memberDelete(id);
+    },
     getStatusName(value){
       if(value == 0){
         return 'Inactive';

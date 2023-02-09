@@ -30,7 +30,8 @@ const routes = [{
                 component: () =>
                     import ('../views/staff/Dashboard.vue'),
                 meta: {
-                    requiresAuth: true
+                    requiresAuth: true,
+
                 }
             },
             {

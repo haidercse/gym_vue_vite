@@ -11,11 +11,7 @@ export const loginUser = ({
                 commit("LOGIN_USER", response.data);
                 commit("SET_SUCCESS", response.data.message);
                 localStorage.setItem("user", response.data.token);
-
-                router.push({
-                    name: 'staff-dashboard'
-                });
-                // window.location.reload();
+                window.location.href = '/staff/dashboard';
             }
         }).catch(error => {
 
