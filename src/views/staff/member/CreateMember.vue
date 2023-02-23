@@ -18,8 +18,9 @@
             </router-link>
           </div>
         </div>
+        <ShowError></ShowError>
         <div class="block-content">
-          <form>
+          <form @submit.prevent="submitForm()" enctype="multipart/form-data">
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="name">Member Name <span>*</span> </label>
@@ -49,10 +50,10 @@
                     type="radio"
                     name="gender"
                     id="gender1"
+                    value="1"
+                    v-model="form.gender"
                   />
-                  <label class="form-check-label" for="gender1">
-                    Male
-                  </label>
+                  <label class="form-check-label" for="gender1"> Male </label>
                 </div>
                 <div class="form-check">
                   <input
@@ -60,15 +61,20 @@
                     type="radio"
                     name="gender"
                     id="gender1"
+                    v-model="form.gender"
+                    value="0"
                   />
-                  <label class="form-check-label" for="gender1">
-                    Female
-                  </label>
+                  <label class="form-check-label" for="gender1"> Female </label>
                 </div>
               </div>
               <div class="form-group col-md-6">
                 <label for="blood">Blood Group <span>*</span> </label>
-                <select name="blood" id="blood" v-model="blood" class="form-control">
+                <select
+                  name="blood"
+                  id="blood"
+                  v-model="form.blood"
+                  class="form-control"
+                >
                   <option value="">Select Blood Group</option>
                   <option value="A+">A+</option>
                   <option value="A-">A-</option>
@@ -81,6 +87,7 @@
                 </select>
               </div>
             </div>
+
             <div class="form-group">
               <label for="address">Address</label>
               <textarea
@@ -91,6 +98,35 @@
                 v-model="form.address"
                 placeholder="Address...."
               ></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="image">Image <span>*</span> </label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="image"
+                  @change="selectImage"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <img
+                  v-if="form.clickImage == ''"
+                  src="https://via.placeholder.com/300.png/09f/fff"
+                  alt=""
+                  style="height: 250px; width: 250px"
+                  class="ml-5"
+                  id="img_preview"
+                />
+                <img
+                  v-if="form.clickImage"
+                  :src="form.clickImage"
+                  alt=""
+                  style="height: 250px; width: 250px"
+                  class="ml-5"
+                  id="img_preview"
+                />
+              </div>
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -105,22 +141,51 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import ShowError from  '../../../components/utilities/ShowError.vue';
 export default {
   data() {
     return {
       form: this.initForm(),
     };
   },
+  components: {ShowError},
   methods: {
+    ...mapActions(["memberSubmit"]),
+    submitForm() {
+      let data = new FormData();
+      data.append("name", this.form.name);
+      data.append("gender", this.form.gender);
+      data.append("mobile_number", this.form.mobile_number);
+      data.append("blood", this.form.blood);
+      data.append("address", this.form.address);
+      data.append("image", this.form.image);
+      // console.log(...data.entries());
+      this.memberSubmit(data);
+    },
+
     initForm() {
       return {
         name: null,
         gender: null,
         mobile_number: null,
-        blood: null,
+        blood: "",
         address: null,
-        image: null,
-        card_no: null,
+        image: "",
+        clickImage: "",
+      };
+    },
+    selectImage(e) {
+     let  image = e.target.files[0];
+     this.form.image = image;
+      this.read(image);
+    },
+    read(image) {
+      let reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onload = (e) => {
+        this.form.clickImage = e.target.result;
+        // this.form.image = e.target.result;
       };
     },
   },

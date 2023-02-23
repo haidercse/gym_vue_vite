@@ -47,9 +47,9 @@
                     <span class="badge" :class=" getStatusColor(member.status)">{{ getStatusName(member.status) }}</span>
                   </td>
                   <td>
-                    <img :src="member.image" :alt=" member.name " width="82px">
+                    <img :src="member.image" :alt=" member.name" style="width: 80px">
                   </td>
-                  <td>{{ member.user.name }}</td>
+                  <td>{{ member.create_by }}</td>
                   <td class="text-center">
                     <div class="btn-group">
                       <button

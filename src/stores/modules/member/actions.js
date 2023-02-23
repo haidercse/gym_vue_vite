@@ -7,14 +7,27 @@ export const getAllMember = ({
 }) => {
     member.all()
         .then(response => {
-            if (response.data.status == true) {
-                commit("SET_MEMBER", response.data.data.data);
+            console.log(response.data.data);
+            console.log(response.data.status);
+
+            if (response.data.status == 200) {
+                commit("SET_MEMBER", response.data.data);
             }
         }).catch(error => {
             console.log(error);
         })
 }
-
+export const memberSubmit = ({ commit }, data) => {
+    member.store(data)
+        .then(response => {
+            console.log(response);
+            if (response.data.status == true) {
+                commit("SET_SUBMIT_MEMBER", response.data.data);
+            }
+        }).catch(error => {
+            commit("SET_ERRORS", error.response.data.errors);
+        })
+}
 export const memberDelete = ({
     commit
 }, memberId) => {

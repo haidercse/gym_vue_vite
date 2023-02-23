@@ -14,12 +14,12 @@ export const loginUser = ({
                 window.location.href = '/staff/dashboard';
             }
         }).catch(error => {
-
             if (error.response.data.status == false) {
-                commit("SET_ERRORS_MESSAGE", error.response.data.message);
-            }
-            if (error.response.data.errors) {
                 commit("SET_ERRORS", error.response.data.errors);
+                // commit("SET_ERRORS_MESSAGE", error.response.data.message);
+            }
+            if (error.response.data.status == 'error') {
+                commit("SET_ERRORS_MESSAGE", error.response.data.message);
             }
 
         });
