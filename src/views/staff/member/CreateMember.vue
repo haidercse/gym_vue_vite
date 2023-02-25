@@ -160,7 +160,7 @@ export default {
       data.append("blood", this.form.blood);
       data.append("address", this.form.address);
       data.append("image", this.form.image);
-      // console.log(...data.entries());
+      console.log(...data.entries());
       this.memberSubmit(data);
     },
 

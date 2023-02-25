@@ -16,7 +16,7 @@
             </router-link>
           </div>
         </div>
-       <ShowSuccess></ShowSuccess>
+        <ShowSuccess></ShowSuccess>
         <div class="block-content">
           <div class="table-responsive">
             <table
@@ -28,11 +28,11 @@
                   <th>Name</th>
                   <th>Id</th>
                   <th>Mobile Number</th>
-                  <th>Card No </th>
-                  <th>Start Date </th>
-                  <th>Status </th>
+                  <th>Card No</th>
+                  <th>Start Date</th>
+                  <th>Status</th>
                   <th>Image</th>
-                  <th>Create By </th>
+                  <th>Create By</th>
                   <th class="text-center" style="width: 100px">Actions</th>
                 </tr>
               </thead>
@@ -42,12 +42,20 @@
                   <td>{{ member.member_id }}</td>
                   <td>{{ member.mobile_number }}</td>
                   <td>{{ member.card_no }}</td>
-                  <td>{{ member.start_date ?? 'N/A' }}</td>
+                  <td>{{ member.start_date ?? "N/A" }}</td>
                   <td>
-                    <span class="badge" :class=" getStatusColor(member.status)">{{ getStatusName(member.status) }}</span>
+                    <span
+                      class="badge"
+                      :class="getStatusColor(member.status)"
+                      >{{ getStatusName(member.status) }}</span
+                    >
                   </td>
                   <td>
-                    <img :src="member.image" :alt=" member.name" style="width: 80px">
+                    <img
+                      :src="member.image"
+                      :alt="member.name"
+                      style="width: 80px"
+                    />
                   </td>
                   <td>{{ member.create_by }}</td>
                   <td class="text-center">
@@ -128,34 +136,40 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import ShowSuccess from '../../../components/utilities/ShowSuccess.vue';
+import ShowSuccess from "../../../components/utilities/ShowSuccess.vue";
 import MainDashboardHeader from "../../../components/template/MainDashboardHeader.vue";
 export default {
   components: {
-    MainDashboardHeader,ShowSuccess
+    MainDashboardHeader,
+    ShowSuccess,
   },
   mounted() {
     this.getAllMember();
   },
   methods: {
-    ...mapActions(["getAllMember","memberDelete"]),
-    deleteMember(id){
-       this.memberDelete(id);
+    ...mapActions(["getAllMember", "memberDelete"]),
+    deleteMember(id) {
+      console.log(id);
+      let text = "Do you want to delete this";
+      if (confirm(text) == true) {
+        this.memberDelete(id);
+      }
+      
     },
-    getStatusName(value){
-      if(value == 0){
-        return 'Inactive';
-      }else if(value == 1){
-        return 'Active';
+    getStatusName(value) {
+      if (value == 0) {
+        return "Inactive";
+      } else if (value == 1) {
+        return "Active";
       }
     },
-    getStatusColor(color){
-      if(color == 0){
-        return 'badge-danger';
-      }else if(color == 1){
-        return 'badge-success';
+    getStatusColor(color) {
+      if (color == 0) {
+        return "badge-danger";
+      } else if (color == 1) {
+        return "badge-success";
       }
-    }
+    },
   },
   computed: {
     ...mapState({
