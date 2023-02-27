@@ -13,7 +13,10 @@ export default {
         });
 
     },
+    getMemberById(id) {
+        return Api.get(`/member/${id}`);
+    },
     deleteById(id) {
-        return Api.delete(`/member/${id}`);
+        return Api.delete(`/member/${id }`);
     }
 }

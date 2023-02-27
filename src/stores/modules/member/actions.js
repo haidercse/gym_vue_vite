@@ -7,14 +7,17 @@ export const getAllMember = ({
 }) => {
     member.all()
         .then(response => {
-            console.log(response.data.data);
-            console.log(response.data.status);
-
             if (response.data.status == 200) {
                 commit("SET_MEMBER", response.data.data);
             }
         }).catch(error => {
             console.log(error);
+        })
+}
+export const getMember = ({ commit }, id) => {
+    member.getMemberById(id)
+        .then(response => {
+            console.log(response.data);
         })
 }
 export const memberSubmit = ({ commit }, data) => {
@@ -28,6 +31,10 @@ export const memberSubmit = ({ commit }, data) => {
             commit("SET_ERRORS", error.response.data.errors);
         })
 }
+
+// export const memberEdit = ({ commit }, data) => {
+
+// }
 export const memberDelete = ({
     commit
 }, memberId) => {

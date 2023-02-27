@@ -52,6 +52,15 @@ const routes = [{
                     requiresAuth: true
                 }
             },
+            {
+                path: '/staff/members/:id/edit',
+                name: 'member-edit',
+                component: () =>
+                    import ('../views/staff/member/EditMember.vue'),
+                meta: {
+                    requiresAuth: true
+                }
+            },
 
 
         ]
@@ -95,4 +104,4 @@ router.beforeEach((to, from, next) => {
 
 });
 
-export default router
+export default router;

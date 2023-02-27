@@ -60,7 +60,7 @@
                   <td>{{ member.create_by }}</td>
                   <td class="text-center">
                     <div class="btn-group">
-                      <button
+                      <router-link :to="{ name: 'member-edit', params: { id: member.id }}"
                         type="button"
                         class="btn btn-sm btn-alt-primary js-tooltip-enabled"
                         data-toggle="tooltip"
@@ -68,7 +68,7 @@
                         data-original-title="Edit"
                       >
                         <i class="fa fa-fw fa-pencil-alt"></i>
-                      </button>
+                      </router-link>
                       <button
                         type="button"
                         class="btn btn-sm btn-alt-primary js-tooltip-enabled"
@@ -148,6 +148,7 @@ export default {
   },
   methods: {
     ...mapActions(["getAllMember", "memberDelete"]),
+  
     deleteMember(id) {
       console.log(id);
       let text = "Do you want to delete this";
