@@ -6,6 +6,8 @@ export default {
         return Api.get('/member');
     },
     store(data) {
+        console.log('**********' +
+            data);
         return Api.post('/member', data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -16,8 +18,8 @@ export default {
     getMemberById(id) {
         return Api.get(`/member/${id}`);
     },
-    update(id, data) {
-        return Api.put(`/member/${id}`, data, {
+    update(payLoad) {
+        return Api.put(`/member/${payLoad.id}`, payLoad.data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             }

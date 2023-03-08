@@ -25,19 +25,27 @@
             >
               <thead>
                 <tr>
+                  <th>Image</th>
                   <th>Name</th>
                   <th>Id</th>
                   <th>Mobile Number</th>
                   <th>Card No</th>
                   <th>Start Date</th>
                   <th>Status</th>
-                  <th>Image</th>
+                 
                   <th>Create By</th>
                   <th class="text-center" style="width: 100px">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(member, id) in all_members" :key="id">
+                  <td>
+                    <img
+                      :src="member.image"
+                      :alt="member.name"
+                      style="width: 80px"
+                    />
+                  </td>
                   <td class="font-w600 font-size-sm">{{ member.name }}</td>
                   <td>{{ member.member_id }}</td>
                   <td>{{ member.mobile_number }}</td>
@@ -50,13 +58,7 @@
                       >{{ getStatusName(member.status) }}</span
                     >
                   </td>
-                  <td>
-                    <img
-                      :src="member.image"
-                      :alt="member.name"
-                      style="width: 80px"
-                    />
-                  </td>
+                  
                   <td>{{ member.create_by }}</td>
                   <td class="text-center">
                     <div class="btn-group">

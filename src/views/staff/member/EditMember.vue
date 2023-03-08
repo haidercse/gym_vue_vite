@@ -21,7 +21,7 @@
        
         <ShowError></ShowError>
         <div class="block-content">
-          <form @submit.prevent="submitForm()" enctype="multipart/form-data">
+          <form @submit.prevent="updateForm()" enctype="multipart/form-data">
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="name">Member Name <span>*</span> </label>
@@ -113,7 +113,7 @@
               </div>
               <div class="form-group col-md-6">
                 <img
-                  v-if="form.clickImage == ''"
+                v-if="form.clickImage == ''"
                   :src="form.image"
                   alt=""
                   style="height: 250px; width: 250px"
@@ -170,7 +170,7 @@ export default {
       this.form.blood = this.get_member.blood;
       this.form.address = this.get_member.address;
       this.form.image = this.get_member.image;
-    }, 3000);
+    }, 2000);
    
   },
   components: { ShowError },
@@ -182,18 +182,23 @@ export default {
   methods: {
     ...mapActions(["memberEdit", "getMember"]),
 
-    submitForm() {
+    updateForm() {
       let data = new FormData();
+      data.append("_method", 'PUT');
       data.append("name", this.form.name);
       data.append("gender", this.form.gender);
       data.append("mobile_number", this.form.mobile_number);
       data.append("blood", this.form.blood);
       data.append("address", this.form.address);
-      if(this.form.clickImage !== null){
+      if(this.form.clickImage !== ''){
         data.append("image", this.form.image);
       }
-      console.log(...data.entries());
-      this.memberEdit(this.id,data);
+
+      let payload = {
+        data : data,
+        id: this.id
+      }
+      this.memberEdit(payload);
     },
 
     selectImage(e) {

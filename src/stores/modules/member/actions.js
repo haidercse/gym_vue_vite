@@ -32,9 +32,9 @@ export const memberSubmit = ({ commit }, data) => {
         })
 }
 
-export const memberEdit = ({ commit }, memberId, data) => {
-    alert(memberId);
-    member.update(memberId, data)
+export const memberEdit = ({ commit }, data) => {
+
+    member.update(data)
         .then(response => {
             console.log(response);
             if (response.data.status == true) {

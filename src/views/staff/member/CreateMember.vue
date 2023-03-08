@@ -152,6 +152,7 @@ export default {
   components: {ShowError},
   methods: {
     ...mapActions(["memberSubmit"]),
+    
     submitForm() {
       let data = new FormData();
       data.append("name", this.form.name);
