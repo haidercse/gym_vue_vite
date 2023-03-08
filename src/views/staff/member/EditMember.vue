@@ -18,6 +18,7 @@
             </router-link>
           </div>
         </div>
+       
         <ShowError></ShowError>
         <div class="block-content">
           <form @submit.prevent="submitForm()" enctype="multipart/form-data">
@@ -28,6 +29,7 @@
                   type="text"
                   class="form-control"
                   id="name"
+                  name="name"
                   v-model="form.name"
                   placeholder="Enter Member Name"
                 />
@@ -112,7 +114,7 @@
               <div class="form-group col-md-6">
                 <img
                   v-if="form.clickImage == ''"
-                  src="https://via.placeholder.com/300.png/09f/fff"
+                  :src="form.image"
                   alt=""
                   style="height: 250px; width: 250px"
                   class="ml-5"
@@ -141,22 +143,45 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import ShowError from  '../../../components/utilities/ShowError.vue';
+import { mapActions, mapState } from "vuex";
+import ShowError from "../../../components/utilities/ShowError.vue";
 export default {
   data() {
     return {
-      form: this.initForm(),
       id: this.$route.params.id,
+      form: {
+        name: '',
+        gender: null,
+        mobile_number: null,
+        blood: "",
+        address: null,
+        image: "",
+        clickImage: "",
+      },
     };
   },
-  mounted(){
+
+  mounted() {
     this.getMember(this.id);
+    setTimeout(() => {
+      this.form.name = this.get_member.name;
+      this.form.mobile_number = this.get_member.mobile_number;
+      this.form.gender = this.get_member.gender;
+      this.form.blood = this.get_member.blood;
+      this.form.address = this.get_member.address;
+      this.form.image = this.get_member.image;
+    }, 3000);
+   
   },
-  components: {ShowError},
+  components: { ShowError },
+  computed: {
+    ...mapState({
+      get_member: (state) => state.member.member,
+    }),
+  },
   methods: {
-    ...mapActions(["memberEdit","getMember"]),
-    
+    ...mapActions(["memberEdit", "getMember"]),
+
     submitForm() {
       let data = new FormData();
       data.append("name", this.form.name);
@@ -164,25 +189,16 @@ export default {
       data.append("mobile_number", this.form.mobile_number);
       data.append("blood", this.form.blood);
       data.append("address", this.form.address);
-      data.append("image", this.form.image);
+      if(this.form.clickImage !== null){
+        data.append("image", this.form.image);
+      }
       console.log(...data.entries());
-      this.memberEdit(data);
+      this.memberEdit(this.id,data);
     },
 
-    initForm() {
-      return {
-        name: null,
-        gender: null,
-        mobile_number: null,
-        blood: "",
-        address: null,
-        image: "",
-        clickImage: "",
-      };
-    },
     selectImage(e) {
-     let  image = e.target.files[0];
-     this.form.image = image;
+      let image = e.target.files[0];
+      this.form.image = image;
       this.read(image);
     },
     read(image) {
