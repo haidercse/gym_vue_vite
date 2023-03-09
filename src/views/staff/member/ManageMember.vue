@@ -39,7 +39,7 @@
               </thead>
               <tbody>
                 <tr v-for="(member, id) in all_members" :key="id">
-                  <td>
+                  <td class="text-center">
                     <img
                       :src="member.image"
                       :alt="member.name"

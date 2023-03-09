@@ -195,9 +195,10 @@ export default {
       }
 
       let payload = {
-        data : data,
+        data: data,
         id: this.id
       }
+      
       this.memberEdit(payload);
     },
 

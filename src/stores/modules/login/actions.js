@@ -5,6 +5,7 @@ import router from '../../../router/index';
 export const loginUser = ({
     commit
 }, data) => {
+ 
     login.store(data)
         .then(response => {
             if (response.data.status == true) {
